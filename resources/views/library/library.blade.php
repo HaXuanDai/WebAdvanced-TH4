@@ -117,23 +117,6 @@
         <div id="resourcesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <!-- Resources will be inserted here by JavaScript -->
         </div>
-
-        <!-- Pagination -->
-        <div class="flex justify-center mt-8">
-            <div class="glass-effect rounded-lg p-2">
-                <nav class="flex space-x-2">
-                    <button class="px-3 py-2 text-gray-300 hover:text-white hover:bg-white/10 rounded">
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
-                    <button class="px-3 py-2 bg-blue-500 text-white rounded">1</button>
-                    <button class="px-3 py-2 text-gray-300 hover:text-white hover:bg-white/10 rounded">2</button>
-                    <button class="px-3 py-2 text-gray-300 hover:text-white hover:bg-white/10 rounded">3</button>
-                    <button class="px-3 py-2 text-gray-300 hover:text-white hover:bg-white/10 rounded">
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                </nav>
-            </div>
-        </div>
     </div>
 
     <!-- Add Resource Modal -->
