@@ -2,48 +2,39 @@ services:
   - type: web
     name: laravel-app
     env: docker
-    plan: free
     region: oregon
+    plan: free
     dockerfilePath: ./Dockerfile
-    buildCommand: ""
-    startCommand: ""
+    buildCommand: ""      # Laravel dùng Apache nên không cần
+    startCommand: ""      # Apache sẽ tự chạy
     autoDeploy: true
+
     envVars:
+      # App
       - key: APP_NAME
         value: Laravel
       - key: APP_ENV
         value: production
       - key: APP_KEY
-        sync: false
+        sync: false        # Nhớ chạy `php artisan key:generate` trước
       - key: APP_DEBUG
-        value: true
+        value: false
       - key: APP_URL
         value: https://webnc-th4.onrender.com
-
       - key: APP_LOCALE
         value: en
       - key: APP_FALLBACK_LOCALE
         value: en
-      - key: APP_FAKER_LOCALE
-        value: en_US
       - key: APP_TIMEZONE
         value: Asia/Ho_Chi_Minh
 
-      - key: PHP_CLI_SERVER_WORKERS
-        value: "4"
-      - key: BCRYPT_ROUNDS
-        value: "12"
-
+      # Log
       - key: LOG_CHANNEL
         value: stack
-      - key: LOG_STACK
-        value: single
-      - key: LOG_DEPRECATIONS_CHANNEL
-        value: null
       - key: LOG_LEVEL
         value: debug
 
-      # DB
+      # Database
       - key: DB_CONNECTION
         value: mysql
       - key: DB_HOST
@@ -57,62 +48,34 @@ services:
       - key: DB_PASSWORD
         sync: false
 
-      # SESSION
+      # Session
       - key: SESSION_DRIVER
-        value: database
+        value: file
       - key: SESSION_LIFETIME
         value: "120"
-      - key: SESSION_ENCRYPT
-        value: "false"
-      - key: SESSION_PATH
-        value: /
-      - key: SESSION_DOMAIN
-        value: null
 
-      # QUEUE / CACHE
+      # Queue / Cache
       - key: QUEUE_CONNECTION
-        value: database
-      - key: CACHE_STORE
-        value: database
+        value: sync         # Dùng `sync` nếu chưa setup queue
+      - key: CACHE_DRIVER
+        value: file         # Tốt hơn `database` nếu chưa setup bảng
 
-      # REDIS
+      # Redis (bỏ nếu không dùng)
       - key: REDIS_CLIENT
-        value: phpredis
+        value: php
       - key: REDIS_HOST
         value: 127.0.0.1
-      - key: REDIS_PASSWORD
-        value: null
       - key: REDIS_PORT
         value: "6379"
 
-      # MAIL
+      # Mail
       - key: MAIL_MAILER
         value: log
-      - key: MAIL_HOST
-        value: 127.0.0.1
-      - key: MAIL_PORT
-        value: "2525"
-      - key: MAIL_USERNAME
-        value: null
-      - key: MAIL_PASSWORD
-        value: null
       - key: MAIL_FROM_ADDRESS
         value: hello@example.com
       - key: MAIL_FROM_NAME
         value: Laravel
 
-      # AWS (optional)
-      - key: AWS_ACCESS_KEY_ID
-        sync: false
-      - key: AWS_SECRET_ACCESS_KEY
-        sync: false
-      - key: AWS_DEFAULT_REGION
-        value: us-east-1
-      - key: AWS_BUCKET
-        sync: false
-      - key: AWS_USE_PATH_STYLE_ENDPOINT
-        value: "false"
-
-      # VITE
+      # Vite (nếu có frontend Vite riêng)
       - key: VITE_APP_NAME
         value: Laravel
