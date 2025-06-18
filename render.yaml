@@ -1,0 +1,118 @@
+services:
+  - type: web
+    name: laravel-app
+    env: docker
+    plan: free
+    region: oregon
+    dockerfilePath: ./Dockerfile
+    buildCommand: ""
+    startCommand: ""
+    autoDeploy: true
+    envVars:
+      - key: APP_NAME
+        value: Laravel
+      - key: APP_ENV
+        value: production
+      - key: APP_KEY
+        sync: false
+      - key: APP_DEBUG
+        value: true
+      - key: APP_URL
+        value: https://webnc-th4.onrender.com
+
+      - key: APP_LOCALE
+        value: en
+      - key: APP_FALLBACK_LOCALE
+        value: en
+      - key: APP_FAKER_LOCALE
+        value: en_US
+      - key: APP_TIMEZONE
+        value: Asia/Ho_Chi_Minh
+
+      - key: PHP_CLI_SERVER_WORKERS
+        value: "4"
+      - key: BCRYPT_ROUNDS
+        value: "12"
+
+      - key: LOG_CHANNEL
+        value: stack
+      - key: LOG_STACK
+        value: single
+      - key: LOG_DEPRECATIONS_CHANNEL
+        value: null
+      - key: LOG_LEVEL
+        value: debug
+
+      # DB
+      - key: DB_CONNECTION
+        value: mysql
+      - key: DB_HOST
+        value: mysql-wnc-myqsl-wnc.l.aivencloud.com
+      - key: DB_PORT
+        value: "17592"
+      - key: DB_DATABASE
+        value: defaultdb
+      - key: DB_USERNAME
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+
+      # SESSION
+      - key: SESSION_DRIVER
+        value: database
+      - key: SESSION_LIFETIME
+        value: "120"
+      - key: SESSION_ENCRYPT
+        value: "false"
+      - key: SESSION_PATH
+        value: /
+      - key: SESSION_DOMAIN
+        value: null
+
+      # QUEUE / CACHE
+      - key: QUEUE_CONNECTION
+        value: database
+      - key: CACHE_STORE
+        value: database
+
+      # REDIS
+      - key: REDIS_CLIENT
+        value: phpredis
+      - key: REDIS_HOST
+        value: 127.0.0.1
+      - key: REDIS_PASSWORD
+        value: null
+      - key: REDIS_PORT
+        value: "6379"
+
+      # MAIL
+      - key: MAIL_MAILER
+        value: log
+      - key: MAIL_HOST
+        value: 127.0.0.1
+      - key: MAIL_PORT
+        value: "2525"
+      - key: MAIL_USERNAME
+        value: null
+      - key: MAIL_PASSWORD
+        value: null
+      - key: MAIL_FROM_ADDRESS
+        value: hello@example.com
+      - key: MAIL_FROM_NAME
+        value: Laravel
+
+      # AWS (optional)
+      - key: AWS_ACCESS_KEY_ID
+        sync: false
+      - key: AWS_SECRET_ACCESS_KEY
+        sync: false
+      - key: AWS_DEFAULT_REGION
+        value: us-east-1
+      - key: AWS_BUCKET
+        sync: false
+      - key: AWS_USE_PATH_STYLE_ENDPOINT
+        value: "false"
+
+      # VITE
+      - key: VITE_APP_NAME
+        value: Laravel
