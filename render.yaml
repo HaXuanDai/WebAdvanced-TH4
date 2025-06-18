@@ -6,7 +6,7 @@ services:
     region: oregon
     dockerfilePath: ./Dockerfile
     buildCommand: ""
-    startCommand: ""
+    startCommand: "apache2-foreground"
     autoDeploy: true
     envVars:
       - key: APP_NAME
@@ -14,7 +14,7 @@ services:
       - key: APP_ENV
         value: production
       - key: APP_KEY
-        sync: false            # Cài sau thủ công qua dashboard
+        sync: false
       - key: APP_DEBUG
         value: false
       - key: APP_URL
@@ -49,7 +49,7 @@ services:
       - key: CACHE_STORE
         value: file
 
-      # Mail (tuỳ chọn)
+      # Mail
       - key: MAIL_MAILER
         value: log
       - key: MAIL_FROM_ADDRESS
@@ -57,6 +57,6 @@ services:
       - key: MAIL_FROM_NAME
         value: Laravel
 
-      # Vite (nếu dùng frontend)
+      # Vite frontend (nếu dùng)
       - key: VITE_APP_NAME
         value: Laravel
