@@ -25,9 +25,6 @@ RUN chown -R www-data:www-data /var/www/html \
 # 8. Bật Rewrite Module cho Apache
 RUN a2enmod rewrite
 
-# 9. Cấu hình Apache để Laravel hoạt động đúng (dùng .htaccess)
-COPY ./docker/apache.conf /etc/apache2/sites-available/000-default.conf
-
 # 10. Expose port (Render cần)
 EXPOSE 80
 
