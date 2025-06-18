@@ -1,0 +1,67 @@
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(135deg, #667eea 0%, #452ecb 50%, #124963 100%);
+    min-height: 100vh;
+    font-family: sans-serif;
+    overflow-x: hidden; 
+}
+       header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: white; 
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); */
+}
+
+.iconheader {
+    height: 50px; /* Consistent height from your HTML */
+    width: auto; /* Auto-scale width to maintain aspect ratio */
+    margin-right: 20px; /* Space between icons */
+    vertical-align: middle; /* Aligns icons nicely in the row */
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+    box-shadow: 0 2px 8px rgba(240, 147, 251, 0.18); /* Consistent shadow for all icons */
+    border-radius: 8px; /* Slightly rounded corners for all icons */
+    padding: 0; /* Reset padding to ensure image fills area, specific padding handled by .iconheader.library */
+}
+
+.iconheader:hover {
+    transform: translateY(-3px) scale(1.05); /* Lift and enlarge slightly on hover */
+    box-shadow: 0 4px 15px rgba(240, 147, 251, 0.3); /* Stronger shadow on hover */
+}
+
+
+.iconheader.resourcelibrary {
+    padding: 5px; /* Padding for the border/highlight effect */
+    border-radius: 5px; /* Slight border radius for this specific icon */
+}
+
+.glass-effect {
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .resource-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+    
