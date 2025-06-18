@@ -2,25 +2,24 @@ services:
   - type: web
     name: laravel-app
     env: docker
-    region: oregon
     plan: free
+    region: oregon
     dockerfilePath: ./Dockerfile
-    buildCommand: ""      # Laravel dùng Apache nên không cần
-    startCommand: ""      # Apache sẽ tự chạy
+    buildCommand: ""
+    startCommand: ""
     autoDeploy: true
-
     envVars:
-      # App
       - key: APP_NAME
         value: Laravel
       - key: APP_ENV
         value: production
       - key: APP_KEY
-        sync: false        # Nhớ chạy `php artisan key:generate` trước
+        sync: false            # Cài sau thủ công qua dashboard
       - key: APP_DEBUG
         value: false
       - key: APP_URL
-        value: https://webnc-th4.onrender.com
+        value: https://your-app-name.onrender.com
+
       - key: APP_LOCALE
         value: en
       - key: APP_FALLBACK_LOCALE
@@ -28,47 +27,29 @@ services:
       - key: APP_TIMEZONE
         value: Asia/Ho_Chi_Minh
 
-      # Log
-      - key: LOG_CHANNEL
-        value: stack
-      - key: LOG_LEVEL
-        value: debug
-
       # Database
       - key: DB_CONNECTION
         value: mysql
       - key: DB_HOST
-        value: mysql-wnc-myqsl-wnc.l.aivencloud.com
+        value: your-db-hostname
       - key: DB_PORT
-        value: "17592"
+        value: "3306"
       - key: DB_DATABASE
-        value: defaultdb
+        value: your-db-name
       - key: DB_USERNAME
         sync: false
       - key: DB_PASSWORD
         sync: false
 
-      # Session
+      # Cache / Session / Queue
       - key: SESSION_DRIVER
         value: file
-      - key: SESSION_LIFETIME
-        value: "120"
-
-      # Queue / Cache
       - key: QUEUE_CONNECTION
-        value: sync         # Dùng `sync` nếu chưa setup queue
-      - key: CACHE_DRIVER
-        value: file         # Tốt hơn `database` nếu chưa setup bảng
+        value: sync
+      - key: CACHE_STORE
+        value: file
 
-      # Redis (bỏ nếu không dùng)
-      - key: REDIS_CLIENT
-        value: php
-      - key: REDIS_HOST
-        value: 127.0.0.1
-      - key: REDIS_PORT
-        value: "6379"
-
-      # Mail
+      # Mail (tuỳ chọn)
       - key: MAIL_MAILER
         value: log
       - key: MAIL_FROM_ADDRESS
@@ -76,6 +57,6 @@ services:
       - key: MAIL_FROM_NAME
         value: Laravel
 
-      # Vite (nếu có frontend Vite riêng)
+      # Vite (nếu dùng frontend)
       - key: VITE_APP_NAME
         value: Laravel
