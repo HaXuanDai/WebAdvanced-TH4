@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  laravel-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: laravel-app
+    ports:
+      - "8000:80"
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - phpmyadmin
+    networks:
+      - laravel
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: laravel-pma
+    environment:
+      - PMA_HOST=mysql-wnc-myqsl-wnc.l.aivencloud.com
+      - PMA_PORT=17592
+      - PMA_USER=avnadmin
+      - PMA_PASSWORD=AVNS__BJEpZxQsJp66A6tMTH
+    ports:
+      - "8080:80"
+    networks:
+      - laravel
+
+networks:
+  laravel:
+    driver: bridge

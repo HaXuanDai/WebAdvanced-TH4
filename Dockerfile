@@ -1,22 +1,22 @@
 FROM php:8.2-apache
 
-# Cài các extension cần thiết
+# Install PHP extensions
 RUN docker-php-ext-install pdo pdo_mysql
 
-# Bật mod_rewrite
+# Enable Apache mod_rewrite
 RUN a2enmod rewrite
 
-# Copy source code vào container
+# Set working directory
+WORKDIR /var/www/html
+
+# Copy app source code
 COPY . /var/www/html
 
-# Laravel cần folder public là document root
-WORKDIR /var/www/html
+# Change ownership
 RUN chown -R www-data:www-data /var/www/html
 
-# Thay đổi Apache config để trỏ đúng public/
+# Update Apache site config to use public folder
 RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
 
-# Cho phép .htaccess hoạt động
+# Allow .htaccess override
 RUN sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
-
-EXPOSE 80
