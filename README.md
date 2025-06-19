@@ -1,61 +1,84 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 📚 Dự án: Hỗ Trợ và Theo Dõi Việc Tự Học
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## 1️⃣ Mô tả dự án
 
-## About Laravel
+**Hỗ Trợ và Theo Dõi Việc Tự Học** là một ứng dụng web cá nhân hóa giúp người dùng quản lý quá trình tự học một cách toàn diện. Dành cho học sinh, sinh viên, người đi làm, hoặc bất kỳ ai đang học một kỹ năng mới, ứng dụng tập trung vào việc hình thành thói quen học tập bền vững, theo dõi tiến độ và đánh giá kết quả.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Các chức năng chính:
+- **Calendar**: Ghi nhận lịch học, tổng hợp số buổi và giờ học.
+- **To-do List**: Tạo và quản lý nhiệm vụ học tập, theo dõi tiến độ.
+- **Library**: Lưu trữ giáo trình, khóa học, liên kết học trực tuyến, đánh dấu trạng thái hoàn thành.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 2️⃣ Công nghệ sử dụng
 
-## Learning Laravel
+- ✅ **PHP (Laravel Framework)**
+- ✅ **Laravel Breeze**
+- ✅ **MySQL (Aiven Cloud)**
+- ✅ **Blade Template**
+- ✅ **Tailwind CSS**
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+---
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## 3️⃣ Kiến trúc hệ thống
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 3.1 Sơ đồ Database
 
-## Laravel Sponsors
+Ứng dụng gồm các bảng chính:
+- `users`: người dùng hệ thống
+- `study_sessions`: phiên học (thời gian, nội dung)
+- `tasks`: nhiệm vụ học tập (To-do list)
+- `learning_resources`: tài nguyên học tập (Library)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 3.2 Các chức năng chính
 
-### Premium Partners
+#### 3.2.1 Quản lý người dùng
+- Đăng ký / Đăng nhập / Đăng xuất
+- Cập nhật thông tin cá nhân
+- Đổi / reset mật khẩu
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+#### 3.2.2 Quản lý thời gian học (Calendar)
+- Ghi nhận ngày, giờ học, nội dung
+- Hiển thị lịch học dạng calendar
+- Thống kê số buổi & số giờ học
 
-## Contributing
+#### 3.2.3 Quản lý công việc (To-do List)
+- Thêm / sửa / xóa nhiệm vụ
+- Cập nhật trạng thái: đang làm / đã hoàn thành
+- Thống kê tiến độ nhiệm vụ
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+#### 3.2.4 Thư viện học liệu (Library)
+- Thêm sách / khóa học / link học tập
+- Cập nhật trạng thái: chưa học / đang học / đã hoàn thành
+- Theo dõi tiến độ hoàn thành từng tài nguyên
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## 4️⃣ Các đối tượng chính
 
-## Security Vulnerabilities
+| Tên bảng | Vai trò | Mối quan hệ |
+|----------|---------|--------------|
+| `User` | Tài khoản người dùng | 1-n với `StudySession`, `Task`, `LearningResource` |
+| `Task` | Nhiệm vụ học tập | thuộc về `User` |
+| `LearningResource` | Tài nguyên học tập | thuộc về `User` |
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
 
-## License
+## 5️⃣ Ví dụ một số đoạn mã chính
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 5.1 `ProfileController.php`
+
+```php
+public function update(ProfileUpdateRequest $request): RedirectResponse
+{
+    $request->user()->fill($request->validated());
+
+    if ($request->user()->isDirty('email')) {
+        $request->user()->email_verified_at = null;
+    }
+
+    $request->user()->save();
+
+    return Redirect::route('profile.edit')->with('status', 'profile-updated');
+}
