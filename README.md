@@ -90,87 +90,37 @@ Các chức năng chính:
 
 ### 5.1 `ProfileController.php`
 
-<?php
-
-namespace App\Http\Controllers;
-
-use App\Http\Requests\ProfileUpdateRequest;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\View\View;
-
-class ProfileController extends Controller
+public function update(ProfileUpdateRequest $request): RedirectResponse
 {
-    public function edit(Request $request): View
-    {
-        return view('profile.edit', [
-            'user' => $request->user(),
-        ]);
+    $request->user()->fill($request->validated());
+
+    if ($request->user()->isDirty('email')) {
+        $request->user()->email_verified_at = null;
     }
 
-    public function update(ProfileUpdateRequest $request): RedirectResponse
-    {
-        $request->user()->fill($request->validated());
+    $request->user()->save();
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
-        }
-
-        $request->user()->save();
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
-    }
-
-    public function destroy(Request $request): RedirectResponse
-    {
-        $request->validateWithBag('userDeletion', [
-            'password' => ['required', 'current_password'],
-        ]);
-        $user = $request->user();
-        Auth::logout();
-        $user->delete();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-        return Redirect::to('/');
-    }
+    return Redirect::route('profile.edit')->with('status', 'profile-updated');
 }
-?>
+
 
 ### 5.2 `User.php`
 
-<?php
+protected $fillable = [
+    'name',
+    'email',
+    'password',
+];
 
-namespace App\Models;
+protected $hidden = [
+    'password',
+    'remember_token',
+];
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-
-class User extends Authenticatable
+protected function casts(): array
 {
-    use HasFactory, Notifiable;
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
+    return [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
     ];
-
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
-
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
-    }
 }
-?>
-
-
-
-
