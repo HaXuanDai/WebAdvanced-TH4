@@ -1,11 +1,11 @@
-    * {
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
 body {
-    background: linear-gradient(135deg, #667eea 0%, #452ecb 50%, #124963 100%);
+    background: linear-gradient(135deg, #667eea 0%, #7764e7 50%, #124963 100%);
     min-height: 100vh;
     font-family: sans-serif;
     overflow-x: hidden; 
@@ -28,6 +28,7 @@ body {
     box-shadow: 0 2px 8px rgba(240, 147, 251, 0.18); /* Consistent shadow for all icons */
     border-radius: 8px; /* Slightly rounded corners for all icons */
     padding: 0; /* Reset padding to ensure image fills area, specific padding handled by .iconheader.library */
+    
 }
 
 .iconheader:hover {
@@ -43,25 +44,169 @@ body {
 
 .glass-effect {
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(102, 126, 234, 0.15);
+    background: linear-gradient(135deg, rgba(102,126,234,0.12) 0%, rgba(68,46,203,0.10) 100%);
 }
-        .card-hover {
-            transition: all 0.3s ease;
-        }
-        .card-hover:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-        }
-        .animate-fade-in {
-            animation: fadeIn 0.5s ease-in;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .resource-card {
-            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-    
+
+.card-hover {
+    transition: all 0.3s;
+}
+.card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(68, 46, 203, 0.13);
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px);}
+    to { opacity: 1; transform: translateY(0);}
+}
+
+.resource-card {
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(102, 234, 216, 0.1);
+}s
+
+/* Nút thêm tài nguyên và các nút chính */
+#addResourceBtn,
+button[type="submit"] {
+    background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);
+    color: #fff;
+    border: none;
+}
+#addResourceBtn:hover,
+button[type="submit"]:hover {
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+}
+
+/* Các trạng thái */
+.bg-blue-500 { background-color: #667eea !important; }
+.bg-green-500 { background-color: #43e97b !important; }
+.bg-yellow-500 { background-color: #ffe066 !important; color: #333 !important; }
+.bg-purple-500 { background-color: #764ba2 !important; }
+.bg-gray-500 { background-color: #a0aec0 !important; }
+
+/* Tag màu */
+.bg-gray-600 { background-color: #4a5568 !important; }
+.bg-red-500 { background-color: #ef4444 !important; }
+.bg-green-600 { background-color: #16a34a !important; }
+.bg-blue-600 { background-color: #2563eb !important; }
+.bg-yellow-600 { background-color: #ca8a04 !important; }
+
+/* Chỉnh màu chữ cho các thẻ */
+.text-white { color: #fff !important; }
+.text-blue-400 { color: #60a5fa !important; }
+.text-green-400 { color: #43e97b !important; }
+.text-gray-400 { color: #cbd5e1 !important; }
+.text-gray-300 { color: #e2e8f0 !important; }
+.text-orange-400 { color: #fb923c !important; }
+.text-gray-500 { color: #a0aec0 !important; }
+
+/* Modal thêm tài nguyên dịch xuống dưới header */
+#addResourceModal .glass-effect {
+    background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%) !important;
+    border: 1.5px solid #a5b4fc !important;
+    box-shadow: 0 4px 24px rgba(99,102,241,0.10), 0 1.5px 8px rgba(0,0,0,0.04) !important;
+    color: #334155 !important;
+    margin-top: 70px;
+}
+
+#addResourceModal label,
+#addResourceModal .block {
+    color: #334155 !important;
+    font-weight: 500;
+}
+
+#addResourceModal input,
+#addResourceModal textarea,
+#addResourceModal select {
+    background: #fff !important;
+    color: #334155 !important;
+    border: 1.5px solid #a5b4fc !important;
+    border-radius: 8px !important;
+    box-shadow: 0 1px 4px rgba(99,102,241,0.04);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+#addResourceModal input:focus,
+#addResourceModal textarea:focus,
+#addResourceModal select:focus {
+    border-color: #6366f1 !important;
+    box-shadow: 0 0 0 2px #a5b4fc33;
+    background: #f0fdfa !important;
+    color: #334155 !important;
+}
+
+#addResourceModal .tag-btn {
+    background: #f1f5f9 !important;
+    color: #64748b !important;
+    border: 1px solid #a5b4fc !important;
+    transition: all 0.2s;
+}
+#addResourceModal .tag-btn:hover,
+#addResourceModal .tag-btn.border-blue-400 {
+    background: #e0e7ff !important;
+    color: #2563eb !important;
+    border-color: #6366f1 !important;
+}
+
+#addResourceModal .flex.justify-end button[type="button"] {
+    color: #64748b !important;
+}
+#addResourceModal .flex.justify-end button[type="button"]:hover {
+    color: #2563eb !important;
+}
+
+#addResourceModal button[type="submit"] {
+    background: linear-gradient(90deg, #99dffb 0%, #38bdf8 100%) !important;
+    color: #fff !important;
+    border: none !important;
+    box-shadow: 0 2px 8px rgba(99,102,241,0.10);
+    border-radius: 8px !important;
+    font-weight: 600;
+}
+#addResourceModal button[type="submit"]:hover {
+    background: linear-gradient(90deg, #6366f1 0%, #38bdf8 100%) !important;
+    color: #fff !important;
+    transform: translateY(-2px) scale(1.03);
+}
+
+#addResourceModal h2 {
+    color: #2563eb !important;
+    font-weight: 700;
+}
+
+#addResourceModal .text-gray-300,
+#addResourceModal .text-gray-400 {
+    color: #64748b !important;
+}
+
+#addResourceModal .text-orange-400 {
+    color: #fb923c !important;
+}
+
+/* Hiệu ứng nền cho select lọc tài nguyên */
+#subjectFilter,
+#typeFilter,
+#statusFilter {
+    background: #f8fafc !important;
+    color: #334155 !important;
+    border: 1.5px solid #a5b4fc !important;
+    border-radius: 8px !important;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+#subjectFilter:hover,
+#typeFilter:hover,
+#statusFilter:hover,
+#subjectFilter:focus,
+#typeFilter:focus,
+#statusFilter:focus {
+    background: #e0e7ff !important;
+    border-color: #6366f1 !important;
+    color: #2563eb !important;
+}

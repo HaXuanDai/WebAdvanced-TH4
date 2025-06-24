@@ -545,9 +545,11 @@
         const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0);
         const todayEnd = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59, 999);
 
-        // Tuần này: từ Chủ nhật đến thứ 7
+        // Tuần này: từ Thứ 2 đến Chủ nhật (theo chuẩn ISO/VN)
         const weekStart = new Date(todayStart);
-        weekStart.setDate(todayStart.getDate() - todayStart.getDay());
+        const dayOfWeek = todayStart.getDay(); // 0: CN, 1: T2, ..., 6: T7
+        // Nếu là Chủ nhật thì lùi về Thứ 2 trước đó 6 ngày, còn lại thì lùi về Thứ 2
+        weekStart.setDate(todayStart.getDate() - (dayOfWeek === 0 ? 6 : dayOfWeek - 1));
         const weekEnd = new Date(weekStart);
         weekEnd.setDate(weekStart.getDate() + 6);
         weekEnd.setHours(23,59,59,999);

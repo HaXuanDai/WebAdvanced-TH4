@@ -188,7 +188,7 @@ $taskLists = TaskList::where('user_id', auth()->id())->get();
           @php
               $deadline = \Carbon\Carbon::parse($task->date_time);
               $now = \Carbon\Carbon::now();
-              $diffHours = $deadline->diffInHours($now, false);
+              $diffHours = $deadline->diffInHours($now, true);
               $isNearDeadline = !$task->completed && $diffHours <= 24 && $deadline > $now;
           @endphp
           <span class="badge px-3 py-2 fs-6 {{ $isNearDeadline ? 'bg-danger' : 'bg-info' }}">
