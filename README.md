@@ -135,9 +135,124 @@ class ProfileController extends Controller
 }
 ```
 
+### 5.2 `EvenController.php`
+```
+<?php
 
+namespace App\Http\Controllers;
 
-### 5.2 `User.php`
+use Illuminate\Http\Request;
+use App\Models\Event;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth; 
+
+class EventController extends Controller
+{
+    public function index()
+    {
+        $events = Event::where('user_id', Auth::id())->get();
+        if (request()->ajax()) {
+            return response()->json(['events' => $events], 200);
+        }
+        return view('calendar.layout', compact('events'));
+    }
+
+    public function create()
+    {
+        return view('calendar.layout'); 
+    }
+
+    public function store(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|string|max:255',
+            'start_time' => 'required|date',
+            'end_time' => 'nullable|date|after_or_equal:start_time',
+            'all_day' => 'boolean',
+            'description' => 'nullable|string',
+            'difficulty' => 'nullable|in:easy,medium,hard',
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Dữ liệu không hợp lệ.',
+                'errors' => $validator->errors() 
+            ], 422); 
+        }
+        $event = Event::create([
+            'title' => $request->title,
+            'start_time' => $request->start_time,
+            'end_time' => $request->end_time,
+            'all_day' => $request->all_day,
+            'description' => $request->description,
+            'user_id' => Auth::id(), 
+            'difficulty' => $request->difficulty,
+        ]);
+        return response()->json([
+            'success' => true,
+            'message' => 'Sự kiện đã được tạo thành công!',
+            'event' => $event->toArray() 
+        ], 201); 
+    }
+
+    public function show($id)
+    {
+        $event = Event::findOrFail($id);
+        if ($event->user_id !== Auth::id()) {
+            return response()->json(['message' => 'Bạn không có quyền xem sự kiện này.'], 403); 
+        }
+        return response()->json($event, 200);
+    }
+
+    public function edit(Event $event)
+    {
+        if ($event->user_id !== Auth::id()) {
+            abort(403, 'Bạn không có quyền chỉnh sửa sự kiện này.');
+        }
+        return view('calendar.layout', compact('event')); 
+    }
+
+    public function update(Request $request, Event $event)
+    {
+        if ($event->user_id !== Auth::id()) {
+            return response()->json(['success' => false, 'message' => 'Bạn không có quyền chỉnh sửa sự kiện này.'], 403);
+        }
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|string|max:255',
+            'start_time' => 'required|date',
+            'end_time' => 'nullable|date|after_or_equal:start_time',
+            'all_day' => 'boolean',
+            'description' => 'nullable|string',
+            'difficulty' => 'nullable|in:easy,medium,hard'
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Dữ liệu không hợp lệ.',
+                'errors' => $validator->errors()
+            ], 422);
+        }
+        $event->update($request->all());
+        return response()->json([
+            'success' => true,
+            'message' => 'Sự kiện đã được tạo thành công!',
+            'event' => $event->toArray() 
+        ], 201);
+    }
+
+    public function destroy($id)
+    {
+        $event = Event::findOrFail($id);
+        if ($event->user_id !== Auth::id()) {
+            return response()->json(['message' => 'Bạn không có quyền xóa sự kiện này.'], 403);
+        }
+        $event->delete();
+        return response()->json(['message' => 'Sự kiện đã được xóa thành công!'], 200);
+    }
+}
+```
+
+### 5.3 `User.php`
 ```
 <?php
 
@@ -170,3 +285,32 @@ class User extends Authenticatable
     }
 }
 ```
+### 5.4 `Event.php`
+```
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Event extends Model
+{
+    use HasFactory;
+    protected $fillable = [
+        'title',
+        'start_time',
+        'end_time',
+        'all_day',
+        'description',
+        'user_id',
+        'difficulty'
+    ];
+    protected $casts = [
+        'start_time' => 'datetime',
+        'end_time' => 'datetime',
+        'all_day' => 'boolean',
+    ];
+}
+```
+
