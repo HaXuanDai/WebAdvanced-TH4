@@ -1,5 +1,12 @@
 # 📚 Dự án: Hỗ Trợ và Theo Dõi Việc Tự Học
 
+# 🌐 Dự án WebNC - TH4
+
+**Sinh viên thực hiện:** Hà Xuân Đại  
+**Mã số sinh viên:** 23010494
+
+---
+
 ## 1️⃣ Mô tả dự án
 
 **Hỗ Trợ và Theo Dõi Việc Tự Học** là một ứng dụng web cá nhân hóa giúp người dùng quản lý quá trình tự học một cách toàn diện. Dành cho học sinh, sinh viên, người đi làm, hoặc bất kỳ ai đang học một kỹ năng mới, ứng dụng tập trung vào việc hình thành thói quen học tập bền vững, theo dõi tiến độ và đánh giá kết quả.
