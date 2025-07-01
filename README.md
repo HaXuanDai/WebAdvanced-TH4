@@ -314,3 +314,9 @@ class Event extends Model
 }
 ```
 
+## 🔗 Liên kết dự án
+
+- 🌐 [Trang web bản tĩnh (GitHub Pages)](https://haxuandai.github.io/WebNC-TH4/)
+- 🚀 [Trang web bản động (Render)](https://webnc-th4.onrender.com/)
+- 📦 [Mã nguồn trên GitHub](https://github.com/HaXuanDai/WebNC-TH4)
+
